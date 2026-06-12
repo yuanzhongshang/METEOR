@@ -1,0 +1,28 @@
+library(Rcpp)
+library(RcppArmadillo)
+library(RcppDist)
+library(magrittr)
+library(data.table)
+library(METEOR)
+#load the z-score
+zscorex =fread(paste0("./zscorex.txt"),head=F)
+zx<-as.matrix(zscorex,ncol=1)
+zscorey_1 =fread(paste0("./zscorey1.txt"),head=F)
+zy1<-as.vector(zscorey_1[[1]])
+zscorey_2 =fread(paste0("./zscorey2.txt"),head=F)
+zy2<-as.vector(zscorey_2[[1]])
+Zscore <- cbind(zx,zy1,zy2)
+Zscore <- t(Zscore)
+#load the LD matrix
+sigma<-fread(paste0("./Sigma.txt"),head=F)
+Sigma <- as.matrix(sigma)
+#load the sample size
+N <- matrix(c(50000,50000,50000),ncol=1)
+#load the correlation matrix and corresponding standard errors
+load("./Omega.rda") #file name: Omega
+Omega_est <- Omega$Omega
+Omega_se <- Omega$Omega_se
+
+result<-METEOR(Zscore,Sigma,N,Omega_est,Omega_se,Gibbsnumber=1000,burninproportion=0.2,
+               pi_beta_shape=0.5,pi_beta_scale=4.5,pi_1_shape=0.5,pi_1_scale=1.5,
+               pi_0_shape=0.05,pi_0_scale=9.95)
