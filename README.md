@@ -9,7 +9,7 @@ It is easy to install the development version of METEORPLE package using the 'de
 ```{r eval=FALSE}
 #install.packages("devtools")
 library(devtools)
-install_github("Liye222/METEOR")
+install_github("yuanzhongshang/METEOR")
 ```
 
 # Usage
