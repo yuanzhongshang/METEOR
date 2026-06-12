@@ -24,7 +24,7 @@ library(METEOR)
 
 # Quick Start
 
-See [Tutorial](https://Liye222.github.io/METEOR/) for detailed documentation and examples.
+See [Tutorial](https://yuanzhongshang.github.io/METEOR/) for detailed documentation and examples.
 
 # Development
 
